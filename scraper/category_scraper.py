@@ -90,8 +90,7 @@ def scrolling(total_steps):
 
 # ----------- SCRAPING FUNCTION ------------- #
             
-# function to scrape search by category
-def category_search_results(driver, base_url, page, category_link, email, password):
+# def category_search_results(driver, base_url, page, category_link, email, password):
     """
     a function to scrape product lsit by category.
     - driver: selenium chrome driver
@@ -136,14 +135,14 @@ def category_search_results(driver, base_url, page, category_link, email, passwo
 
     for area in tqdm(content.find_all('li', class_="col-xs-2-4 shopee-search-item-result__item"), desc="Processing Items"):
         try:
-            title = area.find('div',class_="DgXDzJ rolr6k Zvjf4O").get_text()
+            title = area.find('div',class_="wqNu9E hfYvav _6HM3s0").get_text()
             # img = area.find('img')['src']
-            price = area.find('span',class_="k9JZlv").get_text()
+            price = area.find('span',class_="Q1tsgQ").get_text()
             link = base_url + area.find('a')['href']
-            sold = area.find('div',class_="OwmBnn eumuJJ")
+            sold = area.find('div',class_="KDSeGr Fe9fkg")
             if sold != None:
                 sold = sold.get_text()
-            location = area.find('div',class_="JVW3E2").get_text()
+            location = area.find('div',class_="btehDL").get_text()
             
             titles.append(title)
             prices.append(price)
