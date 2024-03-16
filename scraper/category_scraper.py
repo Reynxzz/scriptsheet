@@ -90,7 +90,8 @@ def scrolling(total_steps):
 
 # ----------- SCRAPING FUNCTION ------------- #
             
-# def category_search_results(driver, base_url, page, category_link, email, password):
+# function to scrape search by category
+def category_search_results(driver, base_url, page, category_link, email, password):
     """
     a function to scrape product lsit by category.
     - driver: selenium chrome driver
@@ -135,14 +136,14 @@ def scrolling(total_steps):
 
     for area in tqdm(content.find_all('li', class_="col-xs-2-4 shopee-search-item-result__item"), desc="Processing Items"):
         try:
-            title = area.find('div',class_="wqNu9E hfYvav _6HM3s0").get_text()
+            title = area.find('div',class_="DgXDzJ rolr6k Zvjf4O").get_text()
             # img = area.find('img')['src']
-            price = area.find('span',class_="Q1tsgQ").get_text()
+            price = area.find('span',class_="k9JZlv").get_text()
             link = base_url + area.find('a')['href']
-            sold = area.find('div',class_="KDSeGr Fe9fkg")
+            sold = area.find('div',class_="OwmBnn eumuJJ")
             if sold != None:
                 sold = sold.get_text()
-            location = area.find('div',class_="btehDL").get_text()
+            location = area.find('div',class_="JVW3E2").get_text()
             
             titles.append(title)
             prices.append(price)
@@ -151,23 +152,24 @@ def scrolling(total_steps):
             locations.append(location)
 
         except:
-            pass
+            driver.save_screenshot('category_search_results_error.png')
 
     return pd.DataFrame({'title':titles, 'price':prices, 'sold':solds, 'location': locations, 'link':links, 'category':category_link})
 
 if __name__ == '__main__':
     category_link = [
-    #            'https://shopee.co.id/Makanan-Minuman-cat.11043451',
-    #            'https://shopee.co.id/Makanan-Ringan-cat.11043451.11043453',
-    #            'https://shopee.co.id/Bahan-Pokok-cat.11043451.11043467',
-    #            'https://shopee.co.id/Menu-Sarapan-cat.11043451.11043496',
-    #            'https://shopee.co.id/Minuman-cat.11043451.11043502',
-    #            'https://shopee.co.id/Susu-Olahan-cat.11043451.11043517',
-    #            'https://shopee.co.id/Makanan-Segar-Beku-cat.11043451.11043529',
-    #            'https://shopee.co.id/Roti-Kue-cat.11043451.11043544',
-    #            'https://shopee.co.id/Makanan-Kaleng-cat.11043451.11043557',
-               'https://shopee.co.id/Makanan-Instan-cat.11043451.11043564',
-               'https://shopee.co.id/Makanan-Minuman-Lainnya-cat.11043451.11043556']
+               'https://shopee.co.id/Makanan-Minuman-cat.11043451'
+               # 'https://shopee.co.id/Makanan-Ringan-cat.11043451.11043453',
+               # 'https://shopee.co.id/Bahan-Pokok-cat.11043451.11043467',
+               # 'https://shopee.co.id/Menu-Sarapan-cat.11043451.11043496',
+               # 'https://shopee.co.id/Minuman-cat.11043451.11043502',
+               # 'https://shopee.co.id/Susu-Olahan-cat.11043451.11043517',
+               # 'https://shopee.co.id/Makanan-Segar-Beku-cat.11043451.11043529',
+               # 'https://shopee.co.id/Roti-Kue-cat.11043451.11043544',
+               # 'https://shopee.co.id/Makanan-Kaleng-cat.11043451.11043557',
+               # 'https://shopee.co.id/Makanan-Instan-cat.11043451.11043564',
+               # 'https://shopee.co.id/Makanan-Minuman-Lainnya-cat.11043451.11043556'
+    ]
     
     email = 'skripsirey'
     password = 'eehpoSispirks$'
